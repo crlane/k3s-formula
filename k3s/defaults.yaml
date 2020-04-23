@@ -1,0 +1,15 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
+k3s:
+  pkg:
+    name: k3s
+  rootgroup: root
+  config: '/etc/k3s'
+  service:
+    name: k3s
+  subcomponent:
+    config: '/etc/k3s-subcomponent-formula.conf'
+  # Just here for testing
+  added_in_defaults: defaults_value
+  winner: defaults
