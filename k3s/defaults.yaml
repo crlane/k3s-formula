@@ -2,14 +2,115 @@
 # vim: ft=yaml
 ---
 k3s:
-  pkg:
-    name: k3s
-  rootgroup: root
-  config: '/etc/k3s'
-  service:
-    name: k3s
-  subcomponent:
-    config: '/etc/k3s-subcomponent-formula.conf'
+  version: latest
+  install:
+    binary:
+      enabled: False
+      download_url: https://github.com/rancher/k3s/releases
+    quickstart:
+      enabled: true
+      download_url: https://get.k3s.io
+    skip_service_start: false
+    bin_dir: '/usr/local/bin'
+    skip_download: false
+    read_only: false
+
+  server:
+
+    logging:
+      verbosity: 0
+      to_file: ""
+      vmodule: ""
+      tostderr: false
+
+    service:
+      name: k3s
+      # networking
+      cidr: "10.42.0.0/16"
+
+    database:
+      endpoint: ""
+      cafile: ""
+      certfile: ""
+      keyfile: ""
+
+    cluster:
+      token: ""
+      token_file: ""
+
+      # listeners
+      bind_addr: 0.0.0.0
+      https_port: 6443
+      advertise_addr: ""
+      advertise_port: 0
+      tls: {}
+
+      # networking
+      cidr: "10.42.0.0/16"
+      dns: "10.43.0.10"
+      domain: "cluster.local"
+
+    flannel:
+      backend: "vxlan"
+
+    kube:
+      components:
+        api_server:
+          args: []
+        scheduler:
+          disable: false
+          args: []
+        controller_mgr:
+          args: []
+        cloud_controller_mgr:
+          disable: false
+          args: []
+        network_policy:
+          disable: false
+        disable: []
+      kubelet:
+        args: []
+      proxy:
+        args: []
+
+    storage:
+      default_local_path: ""
+
+    data:
+      dir: "/var/lib/rancher/k3s"
+
+    admin_client:
+      config_file:
+        write_to: ""
+        mode: ""
+
+    agent: # agent options for server node
+
+      node:
+        labels: []
+        taint: []
+        name: ""
+        id: ""
+
+      runtime:
+        use_docker: False
+        container_runtime_endpoint: ""
+        pause_image: "docker.io/rancher/pause:3.1"
+        private_registry: "/etc/rancher/k3s/registries.yaml"
+
+      networking:
+        node:
+          ip: ""
+          ext_ip: ""
+        resolv_conf: ""
+        flannel:
+          iface: ""
+          conf: ""
+
+  agent:
+    service:
+      name: k3s-agent
+
   # Just here for testing
   added_in_defaults: defaults_value
   winner: defaults
