@@ -5,7 +5,7 @@ k3s:
   version: latest
   install:
     binary:
-      enabled: False
+      enabled: false
       download_url: https://github.com/rancher/k3s/releases
     quickstart:
       enabled: true
@@ -14,6 +14,22 @@ k3s:
     bin_dir: '/usr/local/bin'
     skip_download: false
     read_only: false
+
+  cluster:
+    token: ""
+    token_file: ""
+
+    # listeners
+    bind_addr: 0.0.0.0
+    https_port: 6443
+    advertise_addr: ""
+    advertise_port: 0
+    tls: {}
+
+    # networking
+    cidr: "10.42.0.0/16"
+    dns: "10.43.0.10"
+    domain: "cluster.local"
 
   server:
 
@@ -33,22 +49,6 @@ k3s:
       cafile: ""
       certfile: ""
       keyfile: ""
-
-    cluster:
-      token: ""
-      token_file: ""
-
-      # listeners
-      bind_addr: 0.0.0.0
-      https_port: 6443
-      advertise_addr: ""
-      advertise_port: 0
-      tls: {}
-
-      # networking
-      cidr: "10.42.0.0/16"
-      dns: "10.43.0.10"
-      domain: "cluster.local"
 
     flannel:
       backend: "vxlan"
@@ -93,7 +93,7 @@ k3s:
         id: ""
 
       runtime:
-        use_docker: False
+        use_docker: false
         container_runtime_endpoint: ""
         pause_image: "docker.io/rancher/pause:3.1"
         private_registry: "/etc/rancher/k3s/registries.yaml"
@@ -110,6 +110,42 @@ k3s:
   agent:
     service:
       name: k3s-agent
+
+    logging:
+      verbosity: 0
+      to_file: ""
+      vmodule: ""
+      tostderr: false
+
+    runtime:
+      use_docker: false
+      container_runtime_endpoint: ""
+      pause_image: "docker.io/rancher/pause:3.1"
+      private_registry: "/etc/rancher/k3s/registries.yaml"
+
+    node:
+      labels: []
+      taint: []
+      name: ""
+      id: ""
+
+    networking:
+      node:
+        ip: ""
+        ext_ip: ""
+      resolv_conf: ""
+      flannel:
+        iface: ""
+        conf: ""
+
+    data:
+      dir: "/var/lib/rancher/k3s"
+
+    kube:
+      kubelet:
+        args: []
+      proxy:
+        args: []
 
   # Just here for testing
   added_in_defaults: defaults_value
