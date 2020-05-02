@@ -2,162 +2,29 @@
 # vim: ft=yaml
 ---
 k3s:
-  version: latest
-  install:
-    binary:
-      enabled: false
-      download_url: https://github.com/rancher/k3s/releases
-    quickstart:
-      enabled: true
-      download_url: https://get.k3s.io
-      options:
-        INSTALL_K3S_SKIP_START: true
-        INSTALL_K3S_BIN_DIR: '/usr/local/bin'
-        # INSTALL_K3S_SKIP_DOWNLOAD: true
-        # INSTALL_K3S_SYMLINK: true
-        # INSTALL_K3S_SKIP_ENABLE: false
-        # INSTALL_K3S_VERSION:
-        # INSTALL_K3S_COMMIT:
-        # INSTALL_K3S_BIN_DIR_READ_ONLY: false
-        # INSTALL_K3S_SYSTEMD_DIR: /ets/systemd/system
-        # INSTALL_K3S_EXEC:
-        # INSTALL_K3S_NAME:
-        # INSTALL_K3S_TYPE:
-        # INSTALL_K3S_SELINUX_WARN:
-        # INSTALL_K3S_CHANNEL_URL:
-        # INSTALL_K3S_CHANNEL:
+  quickstart:
+    download_url: https://get.k3s.io
+    options:
+      INSTALL_K3S_SKIP_START: 'true'
+      INSTALL_K3S_BIN_DIR: '/usr/local/bin'
+      # INSTALL_K3S_SKIP_DOWNLOAD: 'true'
+      # INSTALL_K3S_SYMLINK: 'true'
+      # INSTALL_K3S_SKIP_ENABLE: 'false'
+      # INSTALL_K3S_VERSION:
+      # INSTALL_K3S_COMMIT:
+      # INSTALL_K3S_BIN_DIR_READ_ONLY: 'false'
+      # INSTALL_K3S_SYSTEMD_DIR: /ets/systemd/system
+      # INSTALL_K3S_EXEC:
+      # INSTALL_K3S_NAME:
+      # INSTALL_K3S_TYPE:
+      # INSTALL_K3S_SELINUX_WARN:
+      # INSTALL_K3S_CHANNEL_URL:
+      # INSTALL_K3S_CHANNEL:
 
-  cluster:
-    token: ""
-    token_file: ""
-
-    # listeners
-    bind_addr: 0.0.0.0
-    https_port: 6443
-    advertise_addr: ""
-    advertise_port: 0
-    tls: {}
-
-    # networking
-    cidr: "10.42.0.0/16"
-    dns: "10.43.0.10"
-    domain: "cluster.local"
-
-  server:
-
-    logging:
-      verbosity: 0
-      to_file: ""
-      vmodule: ""
-      tostderr: false
-
-    service:
-      name: k3s
-      # networking
-      cidr: "10.42.0.0/16"
-
-    database:
-      endpoint: ""
-      cafile: ""
-      certfile: ""
-      keyfile: ""
-
-    flannel:
-      backend: "vxlan"
-
-    kube:
-      components:
-        api_server:
-          args: []
-        scheduler:
-          disable: false
-          args: []
-        controller_mgr:
-          args: []
-        cloud_controller_mgr:
-          disable: false
-          args: []
-        network_policy:
-          disable: false
-        disable: []
-      kubelet:
-        args: []
-      proxy:
-        args: []
-
-    storage:
-      default_local_path: ""
-
-    data:
-      dir: "/var/lib/rancher/k3s"
-
-    admin_client:
-      config_file:
-        write_to: ""
-        mode: ""
-
-    agent: # agent options for server node
-
-      node:
-        labels: []
-        taint: []
-        name: ""
-        id: ""
-
-      runtime:
-        use_docker: false
-        container_runtime_endpoint: ""
-        pause_image: "docker.io/rancher/pause:3.1"
-        private_registry: "/etc/rancher/k3s/registries.yaml"
-
-      networking:
-        node:
-          ip: ""
-          ext_ip: ""
-        resolv_conf: ""
-        flannel:
-          iface: ""
-          conf: ""
-
-  agent:
-    service:
-      name: k3s-agent
-
-    logging:
-      verbosity: 0
-      to_file: ""
-      vmodule: ""
-      tostderr: false
-
-    runtime:
-      use_docker: false
-      container_runtime_endpoint: ""
-      pause_image: "docker.io/rancher/pause:3.1"
-      private_registry: "/etc/rancher/k3s/registries.yaml"
-
-    node:
-      labels: []
-      taint: []
-      name: ""
-      id: ""
-
-    networking:
-      node:
-        ip: ""
-        ext_ip: ""
-      resolv_conf: ""
-      flannel:
-        iface: ""
-        conf: ""
-
-    data:
-      dir: "/var/lib/rancher/k3s"
-
-    kube:
-      kubelet:
-        args: []
-      proxy:
-        args: []
+    server:
+      args: []
+    agent:
+      args: []
 
   # Just here for testing
   added_in_defaults: defaults_value

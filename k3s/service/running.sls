@@ -6,12 +6,14 @@
 {%- set sls_config_file = tplroot ~ '.config.file' %}
 {%- from tplroot ~ "/map.jinja" import k3s with context %}
 
-include:
-  - {{ sls_config_file }}
+{%- set service_name = salt['grains.filter_by']({
+  'server': 'k3s',
+  'agent': 'k3s-agent'
+}, grain='k3s-role', default='agent') %}
 
 k3s-service-running-service-running:
   service.running:
-    - name: {{ k3s.service.name }}
+    - name: {{ service_name }}
     - enable: True
-    - watch:
-      - sls: {{ sls_config_file }}
+    # - watch:
+    #   - sls: {{ sls_config_file }}

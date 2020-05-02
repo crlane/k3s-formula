@@ -93,12 +93,6 @@ starts the associated k3s service.
 
 This state will install the k3s package only.
 
-``k3s.config``
-^^^^^^^^^^^^^^^^^^^
-
-This state will configure the k3s service and has a dependency on ``k3s.install``
-via include list.
-
 ``k3s.service``
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -120,39 +114,11 @@ then uninstalls the package.
 
 This state will stop the k3s service and disable it at boot time.
 
-``k3s.config.clean``
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This state will remove the configuration of the k3s service and has a
-dependency on ``k3s.service.clean`` via include list.
-
 ``k3s.package.clean``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This state will remove the k3s package and has a depency on
 ``k3s.config.clean`` via include list.
-
-``k3s.subcomponent``
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-*Meta-state (This is a state that includes other states)*.
-
-This state installs a subcomponent configuration file before
-configuring and starting the k3s service.
-
-``k3s.subcomponent.config``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This state will configure the k3s subcomponent and has a
-dependency on ``k3s.config`` via include list.
-
-``k3s.subcomponent.config.clean``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-This state will remove the configuration of the k3s subcomponent
-and reload the k3s service by a dependency on
-``k3s.service.running`` via include list and ``watch_in``
-requisite.
 
 Testing
 -------
