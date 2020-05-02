@@ -10,10 +10,22 @@ k3s:
     quickstart:
       enabled: true
       download_url: https://get.k3s.io
-    skip_service_start: false
-    bin_dir: '/usr/local/bin'
-    skip_download: false
-    read_only: false
+      options:
+        INSTALL_K3S_SKIP_START: true
+        INSTALL_K3S_BIN_DIR: '/usr/local/bin'
+        # INSTALL_K3S_SKIP_DOWNLOAD: true
+        # INSTALL_K3S_SYMLINK: true
+        # INSTALL_K3S_SKIP_ENABLE: false
+        # INSTALL_K3S_VERSION:
+        # INSTALL_K3S_COMMIT:
+        # INSTALL_K3S_BIN_DIR_READ_ONLY: false
+        # INSTALL_K3S_SYSTEMD_DIR: /ets/systemd/system
+        # INSTALL_K3S_EXEC:
+        # INSTALL_K3S_NAME:
+        # INSTALL_K3S_TYPE:
+        # INSTALL_K3S_SELINUX_WARN:
+        # INSTALL_K3S_CHANNEL_URL:
+        # INSTALL_K3S_CHANNEL:
 
   cluster:
     token: ""
